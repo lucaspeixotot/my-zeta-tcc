@@ -1,0 +1,8 @@
+clang
+%c
+%h: *.h
+-I../zephyr/include/
+-I../zephyr/
+-Iinclude/
+-Ibuild/include/generated
+-Ibuild/zephyr/include/generated

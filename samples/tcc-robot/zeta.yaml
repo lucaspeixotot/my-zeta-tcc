@@ -1,0 +1,47 @@
+Channels:
+  - OBSTACLE_DATA:
+      size: 1
+  - BATTERY_DATA:
+      size: 1
+  - WHEEL_DATA:
+      size: 2
+  - SHELF_REQUEST:
+      size: 4
+  - CHARGE_REQUEST:
+      size: 1
+  - RUNNING:
+      size: 1
+        
+Services:
+  - SENSOR:
+      priority: 3
+      stack_size: 512
+      pub_channels:
+        - !ref OBSTACLE_DATA
+        - !ref BATTERY_DATA
+      sub_channels:
+        - !ref RUNNING
+  - CORE:
+      priority: 5
+      stack_size: 512
+      pub_channels:
+        - !ref WHEEL_DATA
+        - !ref CHARGE_REQUEST
+        - !ref RUNNING
+      sub_channels:
+        - !ref OBSTACLE_DATA
+        - !ref BATTERY_DATA
+        - !ref SHELF_REQUEST
+  - TWO_WHEEL:
+      priority: 3
+      stack_size: 512
+      sub_channels:
+        - !ref WHEEL_DATA
+  - NET:
+      priority: 4
+      stack_size: 512
+      pub_channels:
+        - !ref SHELF_REQUEST
+      sub_channels:
+        - !ref CHARGE_REQUEST
+        - !ref RUNNING
