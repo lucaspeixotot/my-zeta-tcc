@@ -1,0 +1,33 @@
+Config:
+  sector_count: 4
+
+Channels:
+  - FIRMWARE_VERSION:
+      size: 4
+      read_only: True
+      initial_value: [0xF1, 0xF2, 0xF3, 0xF4]
+      
+  - POWER_VAL:
+      size: 2
+      persistent: True
+  - SENSOR_VAL:
+      size: 1
+
+Services:
+  - CORE: 
+      priority: 5
+      stack_size: 512
+      pub_channels:
+          - !ref POWER_VAL
+      sub_channels:
+          - !ref SENSOR_VAL
+  - HAL:
+      priority: 4
+      stack_size: 1024
+      pub_channels:
+          - !ref SENSOR_VAL
+  - APP: 
+      priority: 3
+      stack_size: 2048
+      sub_channels:
+          - !ref POWER_VAL

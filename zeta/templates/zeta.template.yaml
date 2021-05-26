@@ -1,0 +1,13 @@
+Channels:
+  - FIRMWARE_VERSION:
+      size: 4
+      read_only: true
+      initial_value: [0xF1, 0xF2, 0xF3, 0xF4]
+        
+Services:
+  - CORE:
+      priority: 5
+      stack_size: 512
+  - BOARD:
+      priority: 4
+      stack_size: 512
